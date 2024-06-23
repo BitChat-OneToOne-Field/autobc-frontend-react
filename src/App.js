@@ -1,23 +1,27 @@
+// src/App.js
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Register from './components/Register';
-import Login from './components/Login';
-import UserAccount from './components/UserAccount';
+import Home from './components/Home';
 import Dashboard from './components/Dashboard';
+import Login from './components/Login';
+import Register from './components/Register';
+import Account from './components/Account';
 
-const App = () => {
+function App() {
   return (
     <Router>
-      <div className='App'>
+      <div className="App">
         <Routes>
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/userAccount" component={UserAccount} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </div>
     </Router>
   );
-};
+}
 
 export default App;

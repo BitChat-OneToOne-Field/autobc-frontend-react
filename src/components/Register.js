@@ -1,36 +1,37 @@
+// src/components/Register.js
+
 import React, { useState } from 'react';
-import { registerUser } from '../services/api';
+import { registerUser } from '..services/api';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const handleRegister = async (e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await registerUser({ email, password });
+      const response = await registerUser(formData);
       console.log(response.data);
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
     }
   };
 
   return (
     <div>
       <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <form onSubmit={handleSubmit}>
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
         <button type="submit">Register</button>
       </form>
     </div>
