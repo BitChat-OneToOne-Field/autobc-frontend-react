@@ -1,3 +1,17 @@
+# s t r u c t u r e
+```css
+src/
+  ├── components/
+  │   ├── Dashboard.js
+  │   ├── Login.js
+  │   ├── Register.js
+  │   ├── UserAccount.js
+  ├── services/
+  │   └── api.js
+  ├── App.js
+  ├── index.js
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
