@@ -1,7 +1,7 @@
 // src/components/Register.js
 
 import React, { useState } from 'react';
-import { registerUser } from '..services/api';
+import { registerUser } from '../services/api';
 
 const Register = () => {
   const [formData, setFormData] = useState({

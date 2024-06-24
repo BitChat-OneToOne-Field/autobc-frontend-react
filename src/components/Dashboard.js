@@ -1,7 +1,7 @@
 // src/components/Dashboard.js
 
 import React, { useEffect, useState } from 'react';
-import { getUserDashboard } from '..services/api';
+import { getUserDashboard } from '../services/api';
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
