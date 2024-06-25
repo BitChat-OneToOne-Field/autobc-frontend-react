@@ -6,12 +6,16 @@ const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/',
 });
 
+// const userapi = axios.create({
+//   userbaseurl: 'http://127.0.0.1:8000/api/user/'
+// });
+
 export const registerUser = async (data) => {
-  return api.post('user/register/', data);
+  return api.post('register/', data);
 };
 
 export const loginUser = async (data) => {
-  return api.post('user/login/', data);
+  return api.post('login/', data);
 };
 
 export const getUserAccount = async (token) => {
