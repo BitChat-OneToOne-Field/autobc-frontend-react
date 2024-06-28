@@ -11,11 +11,11 @@ const api = axios.create({
 // });
 
 export const registerUser = async (data) => {
-  return api.post('register/', data);
+  return api.post('user/register/', data);
 };
 
 export const loginUser = async (data) => {
-  return api.post('login/', data);
+  return api.post('user/login/', data);
 };
 
 export const getUserAccount = async (token) => {
@@ -26,6 +26,12 @@ export const getUserAccount = async (token) => {
 
 export const getUserDashboard = async (token) => {
   return api.get('dashboard/', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+};
+
+export const requestWithdrawal = async (token, data) => {
+  return api.post('withdraw/', data, {
     headers: { Authorization: `Bearer ${token}` }
   });
 };
