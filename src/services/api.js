@@ -30,6 +30,12 @@ export const getUserDashboard = async (token) => {
   });
 };
 
+export const requestDeposit = async (token, data) => {
+  return api.get('deposit/', {
+    headers: {Authorization: `Bearer ${token}`}
+  });
+};
+
 export const requestWithdrawal = async (token, data) => {
   return api.post('withdraw/', data, {
     headers: { Authorization: `Bearer ${token}` }
