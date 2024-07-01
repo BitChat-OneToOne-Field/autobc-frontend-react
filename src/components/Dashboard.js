@@ -1,59 +1,56 @@
-// src/components/Dashboard.js
-
 import React, { useEffect, useState } from 'react';
-import { getUserDashboard, requestDeposit, requestWithdrawal } from '../services/api';
+import { getUserDashboard, generateDepositAddress, checkDeposits, requestWithdrawal } from '../services/api';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [depositAmount, setDepositAmount] = useState('');
+  const [depositAddress, setDepositAddress] = useState('');
   const [withdrawalAmount, setWithdrawalAmount] = useState('');
   const [usdtAddress, setUsdtAddress] = useState('');
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDashboardData = async () => {
       try {
-        const response = await getUserDashboard(token);
+        const response = await getUserDashboard();
         setDashboardData(response.data);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching dashboard data', error);
       }
     };
 
-    fetchData();
-  }, [token]);
+    fetchDashboardData();
+  }, []);
 
-  const handleDeposit = async () => {
+  const handleGenerateDepositAddress = async () => {
     try {
-      const response = await requestDeposit(token, { amount: depositAmount });
-      alert(`Deposit request successful: ${response.data.amount}`);
-      const dashboardResponse = await getUserDashboard(token);
-      setDashboardData(dashboardResponse.data);
-      setDepositAmount(''); // Clear the input field
+      const response = await generateDepositAddress(depositAmount);
+      setDepositAddress(response.data.address);
     } catch (error) {
-      console.error(error);
+      console.error('Error generating deposit address', error);
     }
   };
 
-  const handleDepositRedirect = () => {
-    const amount = prompt('Enter the amount of USDT to deposit');
-    if (amount) {
-      const depositUrl = `https://www.binance.com/en/my/wallet/account/main/withdrawal/crypto/USDT?address=0x61b99741fb1599f99aa3515627980875655d408f&amount=${amount}`;
-      window.location.href = depositUrl;
+  const handleCheckDeposits = async () => {
+    try {
+      await checkDeposits();
+      const response = await getUserDashboard();
+      setDashboardData(response.data);
+    } catch (error) {
+      console.error('Error checking deposits', error);
     }
   };
 
   const handleWithdrawal = async () => {
     try {
-      const response = await requestWithdrawal(token, { amount: withdrawalAmount, usdt_address: usdtAddress });
+      const response = await requestWithdrawal(withdrawalAmount, usdtAddress);
       alert(`Withdrawal request successful: ${response.data.amount}`);
-      const dashboardResponse = await getUserDashboard(token);
+      const dashboardResponse = await getUserDashboard();
       setDashboardData(dashboardResponse.data);
-      setWithdrawalAmount(''); // Clear the input field
-      setUsdtAddress(''); // Clear the input field
+      setWithdrawalAmount('');
+      setUsdtAddress('');
     } catch (error) {
-      console.error(error);
+      console.error('Error requesting withdrawal', error);
     }
   };
 
@@ -68,8 +65,22 @@ const Dashboard = () => {
           <p>Profit Percentage: {dashboardData.profit_percentage}%</p>
           
           <div className="input-group">
-            <button className="dashboard-button" onClick={handleDepositRedirect}>Deposit USDT</button>
+            <input 
+              className="dashboard-input"
+              type="number" 
+              value={depositAmount}
+              onChange={(e) => setDepositAmount(e.target.value)}
+              placeholder="Deposit Amount" 
+            />
+            <button className="dashboard-button" onClick={handleGenerateDepositAddress}>Generate Deposit Address</button>
           </div>
+          {depositAddress && (
+            <div>
+              <p>Send your USDT to the following address:</p>
+              <p>{depositAddress}</p>
+            </div>
+          )}
+          <button className="dashboard-button" onClick={handleCheckDeposits}>Check Deposits</button>
           
           <div className="input-group">
             <input 
