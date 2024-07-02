@@ -9,20 +9,20 @@
 body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  color: #ffffff;
 }
 
-.dashboard-container {
+.register-container {
   background: rgba(0, 0, 0, 0.85);
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-width: 800px;
+  max-width: 400px;
   animation: fadeIn 1s ease-in-out;
 }
 
@@ -37,46 +37,22 @@ body {
   }
 }
 
-.dashboard-header {
+.register-header {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: #f8f8f8;
 }
 
-.dashboard-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.dashboard-content p {
-  background: linear-gradient(45deg, #28a745, #218838);
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 18px;
-  color: #ffffff;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.dashboard-content p:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
 .input-group {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 15px;
 }
 
-.dashboard-input {
+.register-input {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
+  margin-top: 10px;
   border: none;
   border-radius: 5px;
   background-color: #1f1f1f;
@@ -86,12 +62,13 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.dashboard-input:focus {
+.register-input:focus {
   background-color: #292929;
   outline: none;
 }
 
-.dashboard-button {
+.register-button {
+  width: 100%;
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -101,37 +78,28 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
-  text-align: center;
 }
 
-.dashboard-button:hover {
+.register-button:hover {
   background: linear-gradient(45deg, #218838, #28a745);
   transform: translateY(-2px);
 }
 
-.dashboard-button:active {
+.register-button:active {
   transform: translateY(0);
 }
 
-.dashboard-button.check-deposits {
-  margin-top: 20px;
-}
-
 @media (max-width: 500px) {
-  .dashboard-container {
+  .register-container {
     padding: 20px;
     width: 90%;
   }
   
-  .dashboard-header {
+  .register-header {
     font-size: 24px;
   }
   
-  .dashboard-input, .dashboard-button {
+  .register-input, .register-button {
     font-size: 14px;
-  }
-
-  .dashboard-content {
-    grid-template-columns: 1fr;
   }
 }
